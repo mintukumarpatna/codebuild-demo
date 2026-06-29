@@ -3,23 +3,16 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.11
-    commands:
-      - pip install -r requirements.txt
+      docker: 20
 
   pre_build:
     commands:
-      - echo "Running Pre Build"
+      - echo "Starting Docker Build"
 
   build:
     commands:
-      - python app.py
-      - pytest
+      - docker build -t codebuild-demo .
 
   post_build:
     commands:
-      - echo "Build Finished"
-
-artifacts:
-  files:
-    - '**/*'
+      - echo "Docker Image Created"
